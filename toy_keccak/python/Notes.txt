@@ -1,0 +1,26 @@
+Notes.txt
+
+create_digest.py <input.txt> <output.txt>
+
+	Runs all the messages in input.txt through SHA3-256 and places the digests
+	in output.txt. 
+
+	Verified against ShortMsgKAT_SHA3-256.txt with toy_keccak.py (before the round modification, meaning all 24 rounds are run). 
+
+	In the testing code, only KATs where len % 8 == 0 were run, so I stuck to 
+	examples that held that property. 
+
+	Examples from KATs:
+		msg = ""
+		dig = A7FFC6F8BF1ED76651C14756A061D662F580FF4DE43B49FA82D80A4B80F8434A
+		KAT = A7FFC6F8BF1ED76651C14756A061D662F580FF4DE43B49FA82D80A4B80F8434A
+
+		msg = "CC"
+		dig = 677035391CD3701293D385F037BA32796252BB7CE180B00B582DD9B20AAAD7F0
+		KAT = 677035391CD3701293D385F037BA32796252BB7CE180B00B582DD9B20AAAD7F0
+
+		msg = "41FB"
+		dig = 39F31B6E653DFCD9CAED2602FD87F61B6254F581312FB6EEEC4D7148FA2E72AA
+		KAT = 39F31B6E653DFCD9CAED2602FD87F61B6254F581312FB6EEEC4D7148FA2E72AA
+
+	All match, thus the algorithm is maintained and correct.
