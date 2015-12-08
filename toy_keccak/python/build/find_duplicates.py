@@ -1,10 +1,12 @@
 import collections
+import operator
 
 class DigestCounter(dict):
 	def __missing__(self, key):
 		return 0
 
 output_file = open("collisions.txt", 'w')
+all_hashes = open("all_hashes.txt", 'w')
 
 digests = DigestCounter()
 
@@ -35,9 +37,17 @@ collisions = collections.defaultdict(list)
 
 for key in sorted_digests.keys():
 	values = sorted_digests[key]
+	all_hashes.write(key + ": " + str(values) + '\n')
 
 	if digests[key] > 1:
 		collisions[key] = values
 		output_file.write(key + ": " + str(values) + '\n')
 
 print "Total Collisions: " + str(len(collisions.keys()))
+
+# sorted_collisions = sorted(collisions.items(), key = operator.itemgetter(1))
+
+# sorted_output = open("sorted_collisions.txt", 'w')
+
+# for key in sorted_collisions.keys():
+# 	sorted_output.write(key + ": " + str(sorted_collisions[key]) + '\n')
